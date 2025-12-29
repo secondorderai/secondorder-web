@@ -1,55 +1,55 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 const features = [
   {
-    title: "Meta thinking layer",
+    title: 'Meta thinking layer',
     description:
-      "A dynamic cognitive layer that analyzes goals, prompts, and constraints to generate sharper context and execution plans."
+      'A dynamic cognitive layer that analyzes goals, prompts, and constraints to generate sharper context and execution plans.',
   },
   {
-    title: "Self-improving loop",
+    title: 'Self-improving loop',
     description:
-      "Generates an answer, absorbs feedback, audits its own progress, and iterates until the solution is solid."
+      'Generates an answer, absorbs feedback, audits its own progress, and iterates until the solution is solid.',
   },
   {
-    title: "Model orchestration",
+    title: 'Model orchestration',
     description:
-      "Automatically selects model combinations, tools, and reasoning strategies for complex tasks and budgets."
+      'Automatically selects model combinations, tools, and reasoning strategies for complex tasks and budgets.',
   },
   {
-    title: "Knowledge extraction",
+    title: 'Knowledge extraction',
     description:
-      "Builds optimized agents that uncover hidden information and assemble it into usable reasoning paths."
-  }
+      'Builds optimized agents that uncover hidden information and assemble it into usable reasoning paths.',
+  },
 ];
 
 const metaThinking = [
-  "Self-monitoring to detect flaws and drift in real time.",
-  "Self-evaluation of correctness, bias, and coverage.",
-  "Adaptive learning that modifies strategies for each new problem."
+  'Self-monitoring to detect flaws and drift in real time.',
+  'Self-evaluation of correctness, bias, and coverage.',
+  'Adaptive learning that modifies strategies for each new problem.',
 ];
 
 const iterativeLoop = [
-  "Generate a potential solution.",
-  "Receive feedback from the environment or a judge agent.",
-  "Analyze gaps, weaknesses, and missing information.",
-  "Refine the output and repeat until satisfied."
+  'Generate a potential solution.',
+  'Receive feedback from the environment or a judge agent.',
+  'Analyze gaps, weaknesses, and missing information.',
+  'Refine the output and repeat until satisfied.',
 ];
 
 const overview = [
-  "Thinking of thinking: a meta layer on top of LLMs.",
-  "Adaptive chain-of-thought that evolves per task.",
-  "Prompt analysis that creates refined goals and tool plans.",
-  "Judge agent that selects the best plan and routes work.",
-  "Context engineering automated end to end."
+  'Thinking of thinking: a meta layer on top of LLMs.',
+  'Adaptive chain-of-thought that evolves per task.',
+  'Prompt analysis that creates refined goals and tool plans.',
+  'Judge agent that selects the best plan and routes work.',
+  'Context engineering automated end to end.',
 ];
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-bone text-ink">
       <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-paper-grid opacity-30" />
+        <div className="absolute inset-0 bg-gray-200 opacity-30" />
         <div className="absolute -top-40 right-[-20%] h-[420px] w-[420px] rounded-full bg-gradient-to-br from-ink/10 via-transparent to-transparent blur-3xl" />
         <div className="relative mx-auto max-w-6xl px-6 pb-20 pt-12 sm:px-10">
           <header className="flex items-center justify-between">
@@ -67,7 +67,10 @@ export default function Home() {
               <Link className="transition hover:text-ink" href="#what-is-it">
                 What is it
               </Link>
-              <Link className="transition hover:text-ink" href="#ready-to-build">
+              <Link
+                className="transition hover:text-ink"
+                href="#ready-to-build"
+              >
                 Ready to build
               </Link>
             </nav>
@@ -79,12 +82,13 @@ export default function Home() {
                 New layer of LLM cognition
               </p>
               <h1 className="mt-6 font-display text-5xl leading-tight sm:text-6xl">
-                Meta cognition that orchestrates thinking, tools, and improvement.
+                Meta cognition that orchestrates thinking, tools, and
+                improvement.
               </h1>
               <p className="mt-6 text-lg text-ink/70">
-                SecondOrder builds a self-auditing system that reasons about its own
-                reasoning. It generates strategies, coordinates models, and learns
-                from feedback to solve hard problems with precision.
+                SecondOrder builds a self-auditing system that reasons about its
+                own reasoning. It generates strategies, coordinates models, and
+                learns from feedback to solve hard problems with precision.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <a href="mailto:henry@kinwo.net">
@@ -102,13 +106,17 @@ export default function Home() {
                   <p className="text-sm uppercase tracking-[0.3em] text-ink/50">
                     Solver builder
                   </p>
-                  <p className="mt-2 text-xl font-semibold">Tool-driven agents</p>
+                  <p className="mt-2 text-xl font-semibold">
+                    Tool-driven agents
+                  </p>
                 </div>
                 <div>
                   <p className="text-sm uppercase tracking-[0.3em] text-ink/50">
                     Memory
                   </p>
-                  <p className="mt-2 text-xl font-semibold">Self-learning core</p>
+                  <p className="mt-2 text-xl font-semibold">
+                    Self-learning core
+                  </p>
                 </div>
               </div>
             </div>
@@ -134,7 +142,10 @@ export default function Home() {
         </div>
       </div>
 
-      <section className="mx-auto max-w-6xl px-6 py-16 sm:px-10" id="what-is-it">
+      <section
+        className="mx-auto max-w-6xl px-6 py-16 sm:px-10"
+        id="what-is-it"
+      >
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <p className="text-sm uppercase tracking-[0.4em] text-ink/60">
@@ -197,7 +208,9 @@ export default function Home() {
                 <p className="text-xs uppercase tracking-[0.3em] text-bone/60">
                   Judge agent
                 </p>
-                <p className="mt-2 text-lg font-semibold">Planner + evaluator</p>
+                <p className="mt-2 text-lg font-semibold">
+                  Planner + evaluator
+                </p>
               </div>
               <div>
                 <p className="text-xs uppercase tracking-[0.3em] text-bone/60">
@@ -221,14 +234,17 @@ export default function Home() {
                 Cognition that can inspect itself.
               </h2>
               <p className="mt-4 text-ink/70">
-                Inspired by human metacognition, SecondOrder plans, monitors, and
-                evaluates its own thinking to build more resilient reasoning
+                Inspired by human metacognition, SecondOrder plans, monitors,
+                and evaluates its own thinking to build more resilient reasoning
                 pathways.
               </p>
             </div>
             <div className="space-y-4">
               {metaThinking.map((item) => (
-                <div key={item} className="rounded-2xl border border-ink/10 bg-bone p-4">
+                <div
+                  key={item}
+                  className="rounded-2xl border border-ink/10 bg-bone p-4"
+                >
                   <p className="text-sm text-ink/80">{item}</p>
                 </div>
               ))}
