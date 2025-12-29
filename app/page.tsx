@@ -53,8 +53,15 @@ export default function Home() {
         <div className="absolute -top-40 right-[-20%] h-[420px] w-[420px] rounded-full bg-gradient-to-br from-ink/10 via-transparent to-transparent blur-3xl" />
         <div className="relative mx-auto max-w-6xl px-6 pb-20 pt-12 sm:px-10">
           <header className="flex items-center justify-between">
-            <div className="text-xl font-medium tracking-[0.2em] uppercase">
-              SecondOrder
+            <div className="flex items-center gap-3">
+              <img
+                src="/icon.svg"
+                alt="SecondOrder icon"
+                className="h-10 w-10 rounded-2xl border border-ink/10 bg-bone"
+              />
+              <div className="text-xl font-medium tracking-[0.2em] uppercase">
+                SecondOrder
+              </div>
             </div>
             <nav className="hidden items-center gap-8 text-sm text-ink/70 md:flex">
               <Link className="transition hover:text-ink" href="#what-is-it">

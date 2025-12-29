@@ -16,7 +16,17 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: "SecondOrder — Meta Cognition for LLM Systems",
-  description: "A meta-thinking layer that builds self-improving LLM workflows."
+  description: "A meta-thinking layer that builds self-improving LLM workflows.",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      {
+        url: "/icon-dark.svg",
+        type: "image/svg+xml",
+        media: "(prefers-color-scheme: dark)"
+      }
+    ]
+  }
 };
 
 export default function RootLayout({
