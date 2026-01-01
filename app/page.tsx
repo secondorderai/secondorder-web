@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 import Link from 'next/link';
 
 const features = [
@@ -54,8 +55,10 @@ export default function Home() {
         <div className="relative mx-auto max-w-6xl px-6 pb-20 pt-12 sm:px-10">
           <header className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <img
+              <Image
                 src="/icon.svg"
+                width={40}
+                height={40}
                 alt="SecondOrder icon"
                 className="h-10 w-10 rounded-2xl border border-ink/10 bg-bone"
               />
