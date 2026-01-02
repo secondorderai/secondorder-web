@@ -4,7 +4,12 @@ This document describes how SecondOrder integrates with Vercel AI SDK to provide
 
 ## Overview
 
-The integration uses Vercel AI SDK to create a streaming chat experience powered by OpenAI's GPT models. The chat interface serves as a practical demonstration of SecondOrder's meta-thinking approach to AI cognition.
+The integration uses Vercel AI SDK v6+ and @ai-sdk/react v3+ to create a streaming chat experience powered by OpenAI's GPT models. The chat interface serves as a practical demonstration of SecondOrder's meta-thinking approach to AI cognition.
+
+**Installed Packages:**
+- `ai@6.0.5` - Core AI SDK with streaming utilities
+- `@ai-sdk/openai@1.1.3` - OpenAI provider
+- `@ai-sdk/react@3.0.5` - React hooks and components
 
 ## Architecture
 
@@ -33,8 +38,10 @@ The integration uses Vercel AI SDK to create a streaming chat experience powered
 The following packages are required:
 
 ```bash
-npm install ai @ai-sdk/openai zod
+npm install ai @ai-sdk/openai @ai-sdk/react --legacy-peer-deps
 ```
+
+**Note**: The `--legacy-peer-deps` flag is needed because `@ai-sdk/react@3.0.5` has peer dependency conflicts with React 19.0.0. This is a known compatibility issue and the packages work correctly despite the warning.
 
 ### 2. Configure Environment Variables
 

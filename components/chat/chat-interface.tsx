@@ -4,11 +4,17 @@ import { useChat, type UIMessage } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useMemo } from 'react';
 
 export function ChatInterface() {
+  // Memoize transport to avoid creating new instances on every render
+  const transport = useMemo(
+    () => new DefaultChatTransport({ api: '/api/chat' }),
+    []
+  );
+
   const { messages, sendMessage, status } = useChat({
-    transport: new DefaultChatTransport({ api: '/api/chat' }),
+    transport,
   });
   
   const [input, setInput] = useState('');

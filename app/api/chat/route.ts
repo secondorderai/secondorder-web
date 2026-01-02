@@ -5,11 +5,28 @@ import { streamText, convertToModelMessages, type UIMessage } from 'ai';
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
-  const { messages }: { messages: UIMessage[] } = await req.json();
+  try {
+    const body = await req.json();
+    const { messages } = body;
 
-  const result = streamText({
-    model: openai('gpt-4o-mini'),
-    system: `You are a meta-thinking AI assistant specialized in SecondOrder's approach to AI cognition. 
+    // Validate input
+    if (!messages || !Array.isArray(messages)) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid request: messages array is required' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    if (messages.length === 0) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid request: messages array cannot be empty' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const result = streamText({
+      model: openai('gpt-4o-mini'),
+      system: `You are a meta-thinking AI assistant specialized in SecondOrder's approach to AI cognition. 
     
 Your expertise includes:
 - Meta-cognition and recursive thinking strategies
@@ -27,8 +44,15 @@ When answering questions:
 5. Acknowledge limitations and suggest improvements
 
 Always embody the principles of meta-thinking: think about your thinking, evaluate your approach, and refine your strategy.`,
-    messages: await convertToModelMessages(messages),
-  });
+      messages: await convertToModelMessages(messages as UIMessage[]),
+    });
 
-  return result.toUIMessageStreamResponse();
+    return result.toUIMessageStreamResponse();
+  } catch (error) {
+    console.error('Chat API error:', error);
+    return new Response(
+      JSON.stringify({ error: 'Internal server error' }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
 }
