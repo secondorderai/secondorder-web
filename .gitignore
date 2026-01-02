@@ -4,3 +4,8 @@ node_modules
 .next
 .DS_Store
 out
+
+# Testing
+test-results/
+playwright-report/
+.playwright/
