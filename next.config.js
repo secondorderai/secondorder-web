@@ -2,17 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   async headers() {
-    // Content Security Policy - formatted for readability
-    const cspValue = [
-      "default-src 'self'",
-      "script-src 'self'",
-      "style-src 'self' 'unsafe-inline'", // Required for Tailwind CSS
-      "img-src 'self' data: https:",
-      "font-src 'self' data: https://fonts.gstatic.com",
-      "connect-src 'self'",
-      "frame-ancestors 'none'"
-    ].join('; ');
-
     return [
       {
         source: '/:path*',
@@ -26,24 +15,20 @@ const nextConfig = {
             value: 'nosniff'
           },
           {
-            key: 'X-DNS-Prefetch-Control',
-            value: 'off'
-          },
-          {
             key: 'Referrer-Policy',
             value: 'strict-origin-when-cross-origin'
           },
           {
             key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()'
+            value: 'camera=(), microphone=(), geolocation=()'
           },
           {
             key: 'Strict-Transport-Security',
-            value: 'max-age=31536000; includeSubDomains; preload'
+            value: 'max-age=31536000; includeSubDomains'
           },
           {
             key: 'Content-Security-Policy',
-            value: cspValue
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none';"
           }
         ]
       }
