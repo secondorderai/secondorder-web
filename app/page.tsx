@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { ChatInterface } from '@/components/chat/chat-interface';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -69,6 +70,9 @@ export default function Home() {
             <nav className="hidden items-center gap-8 text-sm text-ink/70 md:flex">
               <Link className="transition hover:text-ink" href="#what-is-it">
                 What is it
+              </Link>
+              <Link className="transition hover:text-ink" href="#try-it">
+                Try it
               </Link>
               <Link
                 className="transition hover:text-ink"
@@ -254,6 +258,23 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 py-16 sm:px-10" id="try-it">
+        <div className="mb-10">
+          <p className="text-sm uppercase tracking-[0.4em] text-ink/60">
+            Try it now
+          </p>
+          <h2 className="mt-4 font-display text-4xl">
+            Experience meta-thinking in action.
+          </h2>
+          <p className="mt-4 text-ink/70">
+            Chat with our meta-thinking AI assistant powered by Vercel AI SDK.
+            Ask questions about SecondOrder, explore meta-cognition concepts, or
+            see adaptive reasoning in real-time.
+          </p>
+        </div>
+        <ChatInterface />
       </section>
 
       <section className="border-t border-ink/10 bg-bone" id="ready-to-build">
