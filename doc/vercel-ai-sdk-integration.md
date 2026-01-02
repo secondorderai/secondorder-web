@@ -159,6 +159,20 @@ The endpoint returns a streaming response using Server-Sent Events (SSE) with th
 4. Verify streaming response appears smoothly
 5. Test multiple exchanges to ensure conversation context is maintained
 
+### Unit Tests
+
+Unit tests for the chat interface are located in `components/chat/chat-interface.test.tsx`. Run tests with:
+
+```bash
+npm test components/chat/chat-interface.test.tsx
+```
+
+**Note**: The project's test infrastructure requires `@testing-library/dom` to be installed. If tests fail with a module not found error, install it:
+
+```bash
+npm install --save-dev @testing-library/dom
+```
+
 ### Suggested Test Prompts
 
 - "What is meta-thinking?"
