@@ -10,3 +10,5 @@ test-results/
 playwright-report/
 .playwright/
 coverage
+.env.local
+tsconfig.tsbuildinfo
