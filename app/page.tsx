@@ -76,6 +76,9 @@ export default function Home() {
               >
                 Ready to build
               </Link>
+              <Link className="transition hover:text-ink" href="/chat">
+                Try Chat
+              </Link>
             </nav>
           </header>
 
@@ -94,16 +97,16 @@ export default function Home() {
                 learns from feedback to solve hard problems with precision.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <a href="mailto:henry@kinwo.net">
-                  <Button>Request early access</Button>
-                </a>
+                <Link href="/chat">
+                  <Button>Try the chat</Button>
+                </Link>
               </div>
               <div className="mt-10 grid gap-6 sm:grid-cols-3">
                 <div>
                   <p className="text-sm uppercase tracking-[0.3em] text-ink/50">
                     AI gateway
                   </p>
-                  <p className="mt-2 text-xl font-semibold">GPT-5 stack</p>
+                  <p className="mt-2 text-xl font-semibold">GPT-5.2 stack</p>
                 </div>
                 <div>
                   <p className="text-sm uppercase tracking-[0.3em] text-ink/50">
@@ -271,9 +274,9 @@ export default function Home() {
                 reliable reasoning at scale.
               </p>
             </div>
-            <a href="mailto:henry@kinwo.net">
+            <Link href="/chat">
               <Button size="lg">Start the conversation</Button>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
