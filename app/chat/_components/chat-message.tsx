@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import { Markdown } from '@/components/ui/markdown';
 import type { UIMessage } from 'ai';
 
 interface ChatMessageProps {
@@ -31,7 +32,11 @@ export function ChatMessage({ message }: ChatMessageProps) {
             : 'border border-ink/10 bg-white text-ink'
         )}
       >
-        <p className="whitespace-pre-wrap text-sm">{content}</p>
+        {isUser ? (
+          <p className="whitespace-pre-wrap text-sm">{content}</p>
+        ) : (
+          <Markdown content={content} className="text-sm" />
+        )}
       </div>
     </div>
   );

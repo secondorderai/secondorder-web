@@ -14,3 +14,74 @@ body {
   background: #0b0b0b;
   color: #f7f7f5;
 }
+
+/* Code syntax highlighting - minimal theme matching SecondOrder design */
+.hljs {
+  color: #0b0b0b;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #6b7280;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-addition {
+  color: #0b0b0b;
+  font-weight: 600;
+}
+
+.hljs-string,
+.hljs-doctag,
+.hljs-attr {
+  color: #166534;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: #9333ea;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+.hljs-subst {
+  color: #0b0b0b;
+}
+
+.hljs-type,
+.hljs-class .hljs-title,
+.hljs-built_in {
+  color: #b45309;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link {
+  color: #0891b2;
+}
+
+.hljs-deletion {
+  color: #dc2626;
+}
+
+.hljs-meta {
+  color: #6b7280;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
