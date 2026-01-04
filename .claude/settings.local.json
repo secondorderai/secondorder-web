@@ -5,7 +5,8 @@
       "Bash(npm install:*)",
       "Bash(npm run type-check:*)",
       "Bash(npm run lint)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(npm run ts-check:*)"
     ]
   }
 }

@@ -1,10 +1,10 @@
 'use client';
 
-import { useState } from 'react';
 import { useChat } from '@ai-sdk/react';
+import { useState } from 'react';
 import { ChatHeader } from './_components/chat-header';
-import { ChatMessageList } from './_components/chat-message-list';
 import { ChatInput } from './_components/chat-input';
+import { ChatMessageList } from './_components/chat-message-list';
 
 export default function ChatPage() {
   const { messages, sendMessage, status } = useChat();
