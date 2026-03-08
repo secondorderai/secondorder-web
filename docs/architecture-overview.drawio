@@ -1,0 +1,128 @@
+<mxfile host="app.diagrams.net" modified="2026-03-08T00:00:00.000Z" agent="Codex" version="24.7.17">
+  <diagram id="architecture-overview" name="Architecture Overview">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="user" value="User Browser" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="260" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="nextApp" value="Next.js App Router App" style="swimlane;whiteSpace=wrap;html=1;rounded=0;horizontal=1;startSize=30;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="60" width="760" height="500" as="geometry" />
+        </mxCell>
+
+        <mxCell id="marketing" value="Marketing Site&#xa;app/page.tsx" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="nextApp">
+          <mxGeometry x="30" y="70" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="chatUi" value="Chat UI&#xa;app/chat/page.tsx" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="nextApp">
+          <mxGeometry x="30" y="190" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sharedUi" value="Shared UI Components&#xa;components/ui/*" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="nextApp">
+          <mxGeometry x="250" y="110" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="utils" value="Shared Utilities&#xa;lib/*" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="nextApp">
+          <mxGeometry x="250" y="240" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="chatApi" value="Chat API Route&#xa;app/api/chat/route.ts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="nextApp">
+          <mxGeometry x="500" y="190" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="layout" value="Root Layout&#xa;app/layout.tsx" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="nextApp">
+          <mxGeometry x="500" y="70" width="200" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="styling" value="Styling and Design System" style="swimlane;whiteSpace=wrap;html=1;rounded=0;horizontal=1;startSize=30;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="600" width="500" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="tailwind" value="Tailwind Config&#xa;tailwind.config.ts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="styling">
+          <mxGeometry x="30" y="70" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="globalCss" value="Global Styles&#xa;app/globals.css" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="styling">
+          <mxGeometry x="190" y="70" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="fonts" value="Fonts&#xa;Manrope + Playfair Display" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="styling">
+          <mxGeometry x="350" y="70" width="120" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="quality" value="Quality and Verification" style="swimlane;whiteSpace=wrap;html=1;rounded=0;horizontal=1;startSize=30;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="790" y="600" width="410" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="vitest" value="Vitest&#xa;Unit/Component Tests" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="quality">
+          <mxGeometry x="20" y="70" width="110" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="playwright" value="Playwright&#xa;E2E Tests" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="quality">
+          <mxGeometry x="150" y="70" width="110" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ts" value="TypeScript Strict Mode&#xa;npm run ts-check" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="quality">
+          <mxGeometry x="280" y="70" width="110" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="openai" value="OpenAI API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="250" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e1" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#6c8ebf;" edge="1" parent="1" source="user" target="marketing">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#6c8ebf;" edge="1" parent="1" source="user" target="chatUi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="layout" target="marketing">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="layout" target="chatUi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="sharedUi" target="marketing">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="sharedUi" target="chatUi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="utils" target="sharedUi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#b85450;" edge="1" parent="1" source="chatUi" target="chatApi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#b85450;" edge="1" parent="1" source="chatApi" target="openai">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="tailwind" target="sharedUi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="tailwind" target="marketing">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="tailwind" target="chatUi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="globalCss" target="marketing">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="globalCss" target="chatUi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#9673a6;" edge="1" parent="1" source="fonts" target="layout">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#d79b00;" edge="1" parent="1" source="vitest" target="sharedUi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#d79b00;" edge="1" parent="1" source="vitest" target="utils">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e18" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#d79b00;" edge="1" parent="1" source="playwright" target="marketing">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e19" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#d79b00;" edge="1" parent="1" source="playwright" target="chatUi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e20" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#d79b00;" edge="1" parent="1" source="ts" target="nextApp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
