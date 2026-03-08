@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.describe('Landing Page', () => {
   test.beforeEach(async ({ page }) => {
@@ -9,7 +9,10 @@ test.describe('Landing Page', () => {
     await expect(page).toHaveTitle(/SecondOrder/);
   });
 
-  test('should render the header with logo and navigation', async ({ page }) => {
+  test('should render the header with logo and navigation', async ({
+    page,
+    viewport,
+  }) => {
     // Check logo
     const logo = page.getByAltText('SecondOrder icon');
     await expect(logo).toBeVisible();
@@ -22,9 +25,14 @@ test.describe('Landing Page', () => {
     const whatIsItLink = page.getByRole('link', { name: 'What is it' });
     const readyToBuildLink = page.getByRole('link', { name: 'Ready to build' });
 
-    // These are hidden on mobile but visible on larger screens
-    await expect(whatIsItLink).toBeAttached();
-    await expect(readyToBuildLink).toBeAttached();
+    if (viewport && viewport.width < 768) {
+      await expect(whatIsItLink).toHaveCount(0);
+      await expect(readyToBuildLink).toHaveCount(0);
+      return;
+    }
+
+    await expect(whatIsItLink).toBeVisible();
+    await expect(readyToBuildLink).toBeVisible();
   });
 
   test('should render hero section with main headline', async ({ page }) => {
@@ -34,18 +42,18 @@ test.describe('Landing Page', () => {
     await expect(headline).toBeVisible();
 
     const subheading = page.getByText(
-      /SecondOrder builds a self-auditing system/i
+      /SecondOrder builds a self-auditing system/i,
     );
     await expect(subheading).toBeVisible();
   });
 
   test('should display the CTA button in hero section', async ({ page }) => {
-    const ctaButton = page.getByRole('link', { name: 'Request early access' });
+    const ctaButton = page.getByRole('link', { name: 'Try the chat' });
     await expect(ctaButton).toBeVisible();
 
-    // Verify it's a mailto link
+    // Verify it routes into the product experience
     const href = await ctaButton.getAttribute('href');
-    expect(href).toContain('mailto:henry@kinwo.net');
+    expect(href).toBe('/chat');
   });
 
   test('should display all feature cards', async ({ page }) => {
@@ -63,7 +71,7 @@ test.describe('Landing Page', () => {
   });
 
   test('should display capability stats section', async ({ page }) => {
-    await expect(page.getByText('GPT-5 stack')).toBeVisible();
+    await expect(page.getByText('GPT-5.4 stack')).toBeVisible();
     await expect(page.getByText('Tool-driven agents')).toBeVisible();
     await expect(page.getByText('Self-learning core')).toBeVisible();
   });
@@ -180,12 +188,14 @@ test.describe('Landing Page', () => {
     });
     await expect(heading).toBeVisible();
 
-    const ctaButton = page.getByRole('link', { name: 'Start the conversation' });
+    const ctaButton = page.getByRole('link', {
+      name: 'Start the conversation',
+    });
     await expect(ctaButton).toBeVisible();
 
-    // Verify it's a mailto link
+    // Verify it routes into the product experience
     const href = await ctaButton.getAttribute('href');
-    expect(href).toContain('mailto:henry@kinwo.net');
+    expect(href).toBe('/chat');
   });
 
   test('should have proper responsive design on mobile', async ({ page }) => {
