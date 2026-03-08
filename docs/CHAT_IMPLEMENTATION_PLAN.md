@@ -58,13 +58,13 @@ This document outlines a comprehensive plan to implement a Vercel AI SDK chat in
 
 ### 1.2 Technology Decisions
 
-| Decision | Choice | Rationale |
-|----------|--------|-----------|
-| **AI SDK Version** | `ai@4.x` | Latest stable with improved streaming and TypeScript support |
-| **Provider** | `@ai-sdk/openai` | Official Vercel SDK integration for OpenAI |
-| **Model** | `gpt-4o-mini` | Cost-effective, fast response times, suitable for demo |
-| **Runtime** | Edge Runtime | Lower latency for streaming, global distribution |
-| **State Management** | `useChat` hook | Built-in optimistic updates, automatic streaming |
+| Decision             | Choice           | Rationale                                                    |
+| -------------------- | ---------------- | ------------------------------------------------------------ |
+| **AI SDK Version**   | `ai@4.x`         | Latest stable with improved streaming and TypeScript support |
+| **Provider**         | `@ai-sdk/openai` | Official Vercel SDK integration for OpenAI                   |
+| **Model**            | `gpt-4o-mini`    | Cost-effective, fast response times, suitable for demo       |
+| **Runtime**          | Edge Runtime     | Lower latency for streaming, global distribution             |
+| **State Management** | `useChat` hook   | Built-in optimistic updates, automatic streaming             |
 
 ---
 
@@ -100,11 +100,11 @@ types/
 
 ### 2.2 Files to Modify
 
-| File | Modification |
-|------|--------------|
-| `package.json` | Add AI SDK dependencies |
-| `next.config.js` | Update CSP for OpenAI API calls |
-| `app/page.tsx` | Add navigation link to `/chat` (optional) |
+| File             | Modification                              |
+| ---------------- | ----------------------------------------- |
+| `package.json`   | Add AI SDK dependencies                   |
+| `next.config.js` | Update CSP for OpenAI API calls           |
+| `app/page.tsx`   | Add navigation link to `/chat` (optional) |
 
 ---
 
@@ -121,12 +121,14 @@ npm install ai @ai-sdk/openai
 ```
 
 **Package Details**:
+
 - `ai` (~50KB gzipped): Core Vercel AI SDK with React hooks and streaming utilities
 - `@ai-sdk/openai`: OpenAI provider with full TypeScript support
 
 #### 3.1.2 Environment Configuration
 
 Create `.env.local.example`:
+
 ```env
 # OpenAI API Key - Required for chat functionality
 # Get your key at: https://platform.openai.com/api-keys
@@ -139,7 +141,7 @@ Modify `next.config.js` to allow OpenAI API connections:
 
 ```javascript
 // Update connect-src directive
-"connect-src 'self' https://api.openai.com;"
+"connect-src 'self' https://api.openai.com;";
 ```
 
 ---
@@ -183,6 +185,7 @@ export async function POST(req: Request) {
 #### 3.2.2 System Prompt Strategy
 
 The system prompt should:
+
 - Establish SecondOrder's identity and meta-thinking capabilities
 - Provide context about iterative problem solving
 - Set expectations for response style (concise, analytical)
@@ -234,13 +237,13 @@ ChatPage (app/chat/page.tsx)
 
 #### 3.3.2 Design System Alignment
 
-| Element | Style | Design Token |
-|---------|-------|--------------|
-| Page background | Light neutral | `bg-bone` |
-| User messages | Dark bubble, right-aligned | `bg-ink text-bone` |
-| Assistant messages | Light bubble, left-aligned | `bg-white border-fog` |
-| Input field | Light with border | `bg-bone border-ink/20` |
-| Send button | Primary action | `Button` component (default variant) |
+| Element            | Style                      | Design Token                         |
+| ------------------ | -------------------------- | ------------------------------------ |
+| Page background    | Light neutral              | `bg-bone`                            |
+| User messages      | Dark bubble, right-aligned | `bg-ink text-bone`                   |
+| Assistant messages | Light bubble, left-aligned | `bg-white border-fog`                |
+| Input field        | Light with border          | `bg-bone border-ink/20`              |
+| Send button        | Primary action             | `Button` component (default variant) |
 
 #### 3.3.3 Chat Page Component
 
@@ -407,13 +410,13 @@ useEffect(() => {
 
 ### 4.1 Error Categories
 
-| Category | Handling Strategy |
-|----------|-------------------|
-| **Network Errors** | Retry with exponential backoff, show toast notification |
-| **API Key Missing** | Show setup instructions, graceful degradation |
-| **Rate Limiting** | Queue requests, show "please wait" message |
-| **Model Errors** | Log error, show user-friendly message |
-| **Validation Errors** | Inline form validation, prevent submission |
+| Category              | Handling Strategy                                       |
+| --------------------- | ------------------------------------------------------- |
+| **Network Errors**    | Retry with exponential backoff, show toast notification |
+| **API Key Missing**   | Show setup instructions, graceful degradation           |
+| **Rate Limiting**     | Queue requests, show "please wait" message              |
+| **Model Errors**      | Log error, show user-friendly message                   |
+| **Validation Errors** | Inline form validation, prevent submission              |
 
 ### 4.2 Error Boundary
 
@@ -449,14 +452,14 @@ export async function POST(req: Request) {
     // ... implementation
   } catch (error) {
     if (error instanceof Error) {
-      return new Response(
-        JSON.stringify({ error: error.message }),
-        { status: 500, headers: { 'Content-Type': 'application/json' } }
-      );
+      return new Response(JSON.stringify({ error: error.message }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      });
     }
     return new Response(
       JSON.stringify({ error: 'An unexpected error occurred' }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
+      { status: 500, headers: { 'Content-Type': 'application/json' } },
     );
   }
 }
@@ -469,11 +472,13 @@ export async function POST(req: Request) {
 ### 5.1 Unit Tests (Vitest)
 
 **Components to Test**:
+
 - `ChatMessage`: Renders correctly for user/assistant roles
 - `ChatInput`: Handles input changes and submission
 - `ChatMessageList`: Renders message list, handles empty state
 
 **Example Test**:
+
 ```typescript
 // app/chat/_components/chat-message.test.tsx
 import { render, screen } from '@testing-library/react';
@@ -501,17 +506,17 @@ describe('ChatMessage', () => {
 ### 5.2 Integration Tests (Vitest + MSW)
 
 **Mock the OpenAI API**:
+
 ```typescript
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 
 const server = setupServer(
   http.post('/api/chat', () => {
-    return new HttpResponse(
-      'data: {"content":"Hello from mock!"}\n\n',
-      { headers: { 'Content-Type': 'text/event-stream' } }
-    );
-  })
+    return new HttpResponse('data: {"content":"Hello from mock!"}\n\n', {
+      headers: { 'Content-Type': 'text/event-stream' },
+    });
+  }),
 );
 ```
 
@@ -531,33 +536,41 @@ test.describe('Chat Page', () => {
     await page.click('[data-testid="send-button"]');
 
     // Verify message appears
-    await expect(page.locator('[data-testid="user-message"]')).toContainText('Hello');
+    await expect(page.locator('[data-testid="user-message"]')).toContainText(
+      'Hello',
+    );
 
     // Wait for response (with timeout)
-    await expect(page.locator('[data-testid="assistant-message"]')).toBeVisible({
-      timeout: 30000
-    });
+    await expect(page.locator('[data-testid="assistant-message"]')).toBeVisible(
+      {
+        timeout: 30000,
+      },
+    );
   });
 
-  test('should show loading state while waiting for response', async ({ page }) => {
+  test('should show loading state while waiting for response', async ({
+    page,
+  }) => {
     await page.goto('/chat');
 
     await page.fill('[data-testid="chat-input"]', 'Hello');
     await page.click('[data-testid="send-button"]');
 
     // Verify loading indicator appears
-    await expect(page.locator('[data-testid="typing-indicator"]')).toBeVisible();
+    await expect(
+      page.locator('[data-testid="typing-indicator"]'),
+    ).toBeVisible();
   });
 });
 ```
 
 ### 5.4 Test Coverage Goals
 
-| Category | Target |
-|----------|--------|
-| Unit Tests | 80%+ coverage |
-| Integration Tests | Critical paths covered |
-| E2E Tests | Happy path + error states |
+| Category          | Target                    |
+| ----------------- | ------------------------- |
+| Unit Tests        | 80%+ coverage             |
+| Integration Tests | Critical paths covered    |
+| E2E Tests         | Happy path + error states |
 
 ---
 
@@ -596,6 +609,7 @@ export async function POST(req: Request) {
 ### 6.3 Rate Limiting (Future Enhancement)
 
 Consider implementing rate limiting for production:
+
 - Per-IP rate limiting
 - Per-session message limits
 - Token bucket algorithm
@@ -603,6 +617,7 @@ Consider implementing rate limiting for production:
 ### 6.4 Content Security Policy
 
 Update CSP to allow:
+
 - `connect-src`: `https://api.openai.com` for API calls
 - Keep existing protections for XSS, clickjacking, etc.
 
@@ -618,11 +633,11 @@ Update CSP to allow:
 
 ### 7.2 Bundle Size
 
-| Package | Size (gzipped) |
-|---------|----------------|
-| `ai` | ~50KB |
-| `@ai-sdk/openai` | ~15KB |
-| **Total Impact** | ~65KB |
+| Package          | Size (gzipped) |
+| ---------------- | -------------- |
+| `ai`             | ~50KB          |
+| `@ai-sdk/openai` | ~15KB          |
+| **Total Impact** | ~65KB          |
 
 ### 7.3 Rendering Optimization
 
@@ -670,17 +685,17 @@ RATE_LIMIT_MAX=100
 
 ## 9. Future Enhancements (Out of Scope for v1)
 
-| Enhancement | Priority | Complexity |
-|-------------|----------|------------|
-| Conversation persistence (database) | Medium | High |
-| User authentication | Medium | Medium |
-| Multi-model selection | Low | Medium |
-| Chat history sidebar | Low | Medium |
-| Export conversation | Low | Low |
-| Markdown rendering in messages | Medium | Low |
-| Code syntax highlighting | Medium | Medium |
-| Voice input/output | Low | High |
-| File/image attachments | Low | High |
+| Enhancement                         | Priority | Complexity |
+| ----------------------------------- | -------- | ---------- |
+| Conversation persistence (database) | Medium   | High       |
+| User authentication                 | Medium   | Medium     |
+| Multi-model selection               | Low      | Medium     |
+| Chat history sidebar                | Low      | Medium     |
+| Export conversation                 | Low      | Low        |
+| Markdown rendering in messages      | Medium   | Low        |
+| Code syntax highlighting            | Medium   | Medium     |
+| Voice input/output                  | Low      | High       |
+| File/image attachments              | Low      | High       |
 
 ---
 
@@ -752,6 +767,7 @@ RATE_LIMIT_MAX=100
 ### B. Code Examples Repository
 
 All code examples in this document follow the patterns established in the SecondOrder codebase:
+
 - CVA for component variants
 - `cn()` utility for class merging
 - forwardRef for form components
@@ -759,10 +775,10 @@ All code examples in this document follow the patterns established in the Second
 
 ### C. Decision Log
 
-| Decision | Date | Rationale |
-|----------|------|-----------|
-| Use Edge Runtime | 2026-01 | Lower latency for streaming responses |
-| gpt-4o-mini model | 2026-01 | Cost-effective for demo, easily upgradeable |
+| Decision                  | Date    | Rationale                                          |
+| ------------------------- | ------- | -------------------------------------------------- |
+| Use Edge Runtime          | 2026-01 | Lower latency for streaming responses              |
+| gpt-4o-mini model         | 2026-01 | Cost-effective for demo, easily upgradeable        |
 | Co-locate chat components | 2026-01 | Better code organization, follows Next.js patterns |
 
 ---

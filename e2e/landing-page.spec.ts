@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.describe('Landing Page', () => {
   test.beforeEach(async ({ page }) => {
@@ -42,7 +42,7 @@ test.describe('Landing Page', () => {
     await expect(headline).toBeVisible();
 
     const subheading = page.getByText(
-      /SecondOrder builds a self-auditing system/i
+      /SecondOrder builds a self-auditing system/i,
     );
     await expect(subheading).toBeVisible();
   });
@@ -71,7 +71,7 @@ test.describe('Landing Page', () => {
   });
 
   test('should display capability stats section', async ({ page }) => {
-    await expect(page.getByText('GPT-5.2 stack')).toBeVisible();
+    await expect(page.getByText('GPT-5.4 stack')).toBeVisible();
     await expect(page.getByText('Tool-driven agents')).toBeVisible();
     await expect(page.getByText('Self-learning core')).toBeVisible();
   });
@@ -188,7 +188,9 @@ test.describe('Landing Page', () => {
     });
     await expect(heading).toBeVisible();
 
-    const ctaButton = page.getByRole('link', { name: 'Start the conversation' });
+    const ctaButton = page.getByRole('link', {
+      name: 'Start the conversation',
+    });
     await expect(ctaButton).toBeVisible();
 
     // Verify it routes into the product experience

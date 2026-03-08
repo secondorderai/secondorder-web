@@ -2,7 +2,7 @@
 
 # Features
 
-- Integrate Vercel AI chat AI with AI gateway gpt-5-mini, gpt-5.2, gpt-5.1-thinking, with OpenAI API Key $19 credits
+- Integrate Vercel AI chat AI with AI gateway gpt-5.4
 - Implement basic meta thinking prompt, dynamic thinking layer
 - Solver builder and Solver with Tools
 - Create a multi-step, self-improving process, making a system that autonomously audits its own progress

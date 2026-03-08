@@ -46,6 +46,48 @@ const overview = [
   'Context engineering automated end to end.',
 ];
 
+const implementedToday = [
+  {
+    label: 'Chat experience',
+    title: 'Streaming assistant in /chat',
+    description:
+      'A working chat interface already ships with streaming responses and a focused meta-thinking assistant persona.',
+  },
+  {
+    label: 'Core model',
+    title: 'GPT-5.4-backed reasoning',
+    description:
+      'The current assistant runs on GPT-5.4 with a system prompt centered on planning, self-evaluation, and adaptive reasoning.',
+  },
+  {
+    label: 'Interaction loop',
+    title: 'Prompt-to-response workflow',
+    description:
+      'Users can already move from the marketing page into a live assistant experience designed around reflective problem solving.',
+  },
+];
+
+const roadmapPhases = [
+  {
+    phase: 'Phase 1',
+    title: 'Structured response modes',
+    description:
+      'Introduce explicit plan, answer, critique, and refine behaviors so the assistant acts more deliberately on every task.',
+  },
+  {
+    phase: 'Phase 2',
+    title: 'Planning and self-critique',
+    description:
+      'Add planner and critic passes that extract constraints, inspect drafts, and improve answer quality before delivery.',
+  },
+  {
+    phase: 'Phase 3',
+    title: 'Tools, memory, and orchestration',
+    description:
+      'Expand beyond chat with tool routing, memory, and eventually a judge-agent layer that chooses stronger strategies per task.',
+  },
+];
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-bone text-ink">
@@ -106,7 +148,7 @@ export default function Home() {
                   <p className="text-sm uppercase tracking-[0.3em] text-ink/50">
                     AI gateway
                   </p>
-                  <p className="mt-2 text-xl font-semibold">GPT-5.2 stack</p>
+                  <p className="mt-2 text-xl font-semibold">GPT-5.4 stack</p>
                 </div>
                 <div>
                   <p className="text-sm uppercase tracking-[0.3em] text-ink/50">
@@ -171,6 +213,38 @@ export default function Home() {
               <div key={item} className="flex items-start gap-3">
                 <span className="mt-2 h-1.5 w-1.5 rounded-full bg-ink" />
                 <p className="text-sm text-ink/80">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 py-16 sm:px-10">
+        <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr]">
+          <div>
+            <p className="text-sm uppercase tracking-[0.4em] text-ink/60">
+              Implemented today
+            </p>
+            <h2 className="mt-4 font-display text-4xl">
+              A working v1 is already in place.
+            </h2>
+            <p className="mt-4 text-ink/70">
+              SecondOrder is not just a concept page. The current release
+              already includes a live chat assistant, streaming responses, and a
+              meta-thinking system prompt focused on reflective reasoning.
+            </p>
+          </div>
+          <div className="grid gap-4">
+            {implementedToday.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-3xl border border-ink/10 bg-white/70 p-6"
+              >
+                <p className="text-xs uppercase tracking-[0.3em] text-ink/55">
+                  {item.label}
+                </p>
+                <h3 className="mt-3 text-xl font-semibold">{item.title}</h3>
+                <p className="mt-3 text-sm text-ink/75">{item.description}</p>
               </div>
             ))}
           </div>
@@ -252,6 +326,42 @@ export default function Home() {
                   className="rounded-2xl border border-ink/10 bg-bone p-4"
                 >
                   <p className="text-sm text-ink/80">{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 py-16 sm:px-10">
+        <div className="rounded-3xl border border-ink/10 bg-ink p-8 text-bone sm:p-12">
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+            <div>
+              <p className="text-sm uppercase tracking-[0.4em] text-bone/70">
+                Product roadmap
+              </p>
+              <h2 className="mt-4 font-display text-4xl">
+                What comes after the current assistant.
+              </h2>
+              <p className="mt-4 text-bone/75">
+                The next releases push SecondOrder from a prompt-shaped
+                assistant toward a real meta-cognitive system with planning,
+                critique, tools, memory, and orchestration.
+              </p>
+            </div>
+            <div className="space-y-4">
+              {roadmapPhases.map((item) => (
+                <div
+                  key={item.title}
+                  className="rounded-2xl border border-bone/15 bg-bone/5 p-5"
+                >
+                  <p className="text-xs uppercase tracking-[0.3em] text-bone/55">
+                    {item.phase}
+                  </p>
+                  <h3 className="mt-2 text-xl font-semibold">{item.title}</h3>
+                  <p className="mt-3 text-sm text-bone/75">
+                    {item.description}
+                  </p>
                 </div>
               ))}
             </div>

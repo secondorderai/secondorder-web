@@ -78,7 +78,7 @@ export async function POST(req: Request) {
     }
 
     const result = streamText({
-      model: openai('gpt-5.2'),
+      model: openai('gpt-5.4'),
       system: SYSTEM_PROMPT,
       messages: normalizedMessages,
     });
@@ -93,7 +93,7 @@ export async function POST(req: Request) {
     }
     return new Response(
       JSON.stringify({ error: 'An unexpected error occurred' }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
+      { status: 500, headers: { 'Content-Type': 'application/json' } },
     );
   }
 }

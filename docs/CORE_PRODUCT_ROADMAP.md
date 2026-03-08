@@ -36,7 +36,7 @@ This is a useful v1, but it is still fundamentally a prompt-shaped assistant rat
 - streaming chat experience
 - basic input validation
 - meta-thinking product framing in the system prompt
-- GPT-5.2-backed response generation
+- LLM-backed response generation
 
 ### What is missing
 
