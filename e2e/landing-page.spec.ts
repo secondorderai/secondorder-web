@@ -37,12 +37,12 @@ test.describe('Landing Page', () => {
 
   test('should render hero section with main headline', async ({ page }) => {
     const headline = page.getByRole('heading', {
-      name: /Meta cognition that orchestrates thinking/i,
+      name: /See how the assistant frames the task before you trust the answer/i,
     });
     await expect(headline).toBeVisible();
 
     const subheading = page.getByText(
-      /SecondOrder builds a self-auditing system/i,
+      /SecondOrder turns hidden orchestration into a product surface/i,
     );
     await expect(subheading).toBeVisible();
   });
@@ -58,10 +58,10 @@ test.describe('Landing Page', () => {
 
   test('should display all feature cards', async ({ page }) => {
     const features = [
-      'Meta thinking layer',
-      'Self-improving loop',
-      'Model orchestration',
-      'Knowledge extraction',
+      'Visible meta mode',
+      'Plan preview',
+      'Confidence signals',
+      'Feedback and evaluation',
     ];
 
     for (const feature of features) {
@@ -71,9 +71,9 @@ test.describe('Landing Page', () => {
   });
 
   test('should display capability stats section', async ({ page }) => {
-    await expect(page.getByText('GPT-5.4 stack')).toBeVisible();
-    await expect(page.getByText('Tool-driven agents')).toBeVisible();
-    await expect(page.getByText('Self-learning core')).toBeVisible();
+    await expect(page.getByText('Visible framing', { exact: true })).toBeVisible();
+    await expect(page.getByText('Planner + critic', { exact: true }).first()).toBeVisible();
+    await expect(page.getByText('Feedback + events', { exact: true })).toBeVisible();
   });
 
   test('should navigate to "What is it" section when link is clicked', async ({
@@ -126,9 +126,9 @@ test.describe('Landing Page', () => {
 
     // Check overview items
     const overviewItems = [
-      'Thinking of thinking: a meta layer on top of LLMs.',
-      'Adaptive chain-of-thought that evolves per task.',
-      'Judge agent that selects the best plan and routes work.',
+      'A meta layer on top of chat that makes task interpretation visible.',
+      'Structured planner and critic passes running behind the assistant.',
+      'Event instrumentation for completion, feedback, and plan-preview usage.',
     ];
 
     for (const item of overviewItems) {
@@ -138,16 +138,16 @@ test.describe('Landing Page', () => {
 
   test('should display iterative problem solving section', async ({ page }) => {
     const heading = page.getByRole('heading', {
-      name: /A loop designed to refine every output/i,
+      name: /A structured loop designed for harder requests/i,
     });
     await expect(heading).toBeVisible();
 
     // Check numbered steps
     const steps = [
-      'Generate a potential solution.',
-      'Receive feedback from the environment or a judge agent.',
-      'Analyze gaps, weaknesses, and missing information.',
-      'Refine the output and repeat until satisfied.',
+      'Interpret the task and decide whether meta mode is needed.',
+      'Generate a compact plan and response strategy for harder requests.',
+      'Review the draft for confidence, limitations, and missing context.',
+      'Return the answer with visible framing, then capture user feedback.',
     ];
 
     for (const step of steps) {
@@ -157,12 +157,12 @@ test.describe('Landing Page', () => {
 
   test('should display self-auditing section', async ({ page }) => {
     const heading = page.getByRole('heading', {
-      name: /Progress monitoring that knows when to stop/i,
+      name: /Trust signals that expose uncertainty without dumping internals/i,
     });
     await expect(heading).toBeVisible();
 
-    await expect(page.getByText('Planner + evaluator')).toBeVisible();
-    await expect(page.getByText('Verified solution')).toBeVisible();
+    await expect(page.getByText('Planner + critic').nth(1)).toBeVisible();
+    await expect(page.getByText('Feedback captured')).toBeVisible();
   });
 
   test('should display meta-thinking section', async ({ page }) => {
@@ -172,9 +172,9 @@ test.describe('Landing Page', () => {
     await expect(heading).toBeVisible();
 
     const metaThinkingItems = [
-      'Self-monitoring to detect flaws and drift in real time.',
-      'Self-evaluation of correctness, bias, and coverage.',
-      'Adaptive learning that modifies strategies for each new problem.',
+      'Task classification routes complex requests into a structured meta pass.',
+      'Planner and critic workflow output drives the UI instead of freeform guesswork.',
+      'Trust signals stay compact so the chat still feels fast and conversational.',
     ];
 
     for (const item of metaThinkingItems) {
@@ -211,7 +211,7 @@ test.describe('Landing Page', () => {
 
     // Hero section should be visible
     const headline = page.getByRole('heading', {
-      name: /Meta cognition that orchestrates thinking/i,
+      name: /See how the assistant frames the task before you trust the answer/i,
     });
     await expect(headline).toBeVisible();
   });
@@ -225,7 +225,7 @@ test.describe('Landing Page', () => {
 
     // All major sections should be visible
     const headline = page.getByRole('heading', {
-      name: /Meta cognition that orchestrates thinking/i,
+      name: /See how the assistant frames the task before you trust the answer/i,
     });
     await expect(headline).toBeVisible();
   });
@@ -239,7 +239,7 @@ test.describe('Landing Page', () => {
 
     // Check grid layouts are rendering properly
     const headline = page.getByRole('heading', {
-      name: /Meta cognition that orchestrates thinking/i,
+      name: /See how the assistant frames the task before you trust the answer/i,
     });
     await expect(headline).toBeVisible();
   });

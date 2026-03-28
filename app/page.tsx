@@ -4,87 +4,93 @@ import Link from 'next/link';
 
 const features = [
   {
-    title: 'Meta thinking layer',
+    title: 'Visible meta mode',
     description:
-      'A dynamic cognitive layer that analyzes goals, prompts, and constraints to generate sharper context and execution plans.',
+      'Meta-routed replies show the detected task type, a compact goal summary, constraints, and whether SecondOrder is using a structured pass.',
   },
   {
-    title: 'Self-improving loop',
+    title: 'Plan preview',
     description:
-      'Generates an answer, absorbs feedback, audits its own progress, and iterates until the solution is solid.',
+      'Complex requests include a compact plan preview that stays collapsed by default and expands when you want to inspect the approach.',
   },
   {
-    title: 'Model orchestration',
+    title: 'Confidence signals',
     description:
-      'Automatically selects model combinations, tools, and reasoning strategies for complex tasks and budgets.',
+      'Each meta response can surface confidence, limitations, and context gaps so the assistant is easier to trust and easier to challenge.',
   },
   {
-    title: 'Knowledge extraction',
+    title: 'Feedback and evaluation',
     description:
-      'Builds optimized agents that uncover hidden information and assemble it into usable reasoning paths.',
+      'Assistant messages support structured feedback, and the chat lifecycle emits evaluation events for product-level measurement.',
   },
 ];
 
 const metaThinking = [
-  'Self-monitoring to detect flaws and drift in real time.',
-  'Self-evaluation of correctness, bias, and coverage.',
-  'Adaptive learning that modifies strategies for each new problem.',
+  'Task classification routes complex requests into a structured meta pass.',
+  'Planner and critic workflow output drives the UI instead of freeform guesswork.',
+  'Trust signals stay compact so the chat still feels fast and conversational.',
 ];
 
 const iterativeLoop = [
-  'Generate a potential solution.',
-  'Receive feedback from the environment or a judge agent.',
-  'Analyze gaps, weaknesses, and missing information.',
-  'Refine the output and repeat until satisfied.',
+  'Interpret the task and decide whether meta mode is needed.',
+  'Generate a compact plan and response strategy for harder requests.',
+  'Review the draft for confidence, limitations, and missing context.',
+  'Return the answer with visible framing, then capture user feedback.',
 ];
 
 const overview = [
-  'Thinking of thinking: a meta layer on top of LLMs.',
-  'Adaptive chain-of-thought that evolves per task.',
-  'Prompt analysis that creates refined goals and tool plans.',
-  'Judge agent that selects the best plan and routes work.',
-  'Context engineering automated end to end.',
+  'A meta layer on top of chat that makes task interpretation visible.',
+  'Structured planner and critic passes running behind the assistant.',
+  'Compact plan previews for planning, analysis, decision, and troubleshooting tasks.',
+  'Thread-scoped history and resource isolation across conversations.',
+  'Event instrumentation for completion, feedback, and plan-preview usage.',
 ];
 
 const implementedToday = [
   {
-    label: 'Chat experience',
-    title: 'Streaming assistant in /chat',
+    label: 'Meta UX',
+    title: 'Task framing, plan previews, and trust signals',
     description:
-      'A working chat interface already ships with streaming responses and a focused meta-thinking assistant persona.',
+      'The shipped chat experience shows how SecondOrder framed a meta-routed task before or alongside the final answer.',
   },
   {
-    label: 'Core model',
-    title: 'GPT-5.4-backed reasoning',
+    label: 'Workflow',
+    title: 'Planner and critic passes in production',
     description:
-      'The current assistant runs on GPT-5.4 with a system prompt centered on planning, self-evaluation, and adaptive reasoning.',
+      'Complex requests already run through structured planning and critique steps that produce goal, constraints, plan, confidence, and limitation metadata.',
   },
   {
-    label: 'Interaction loop',
-    title: 'Prompt-to-response workflow',
+    label: 'Learning loop',
+    title: 'Structured feedback and evaluation events',
     description:
-      'Users can already move from the marketing page into a live assistant experience designed around reflective problem solving.',
+      'Users can rate individual assistant messages, and the product records core lifecycle events for measuring outcomes over time.',
+  },
+  {
+    label: 'Chat foundation',
+    title: 'Threaded history and onboarding',
+    description:
+      'The current release preserves thread URLs, loads chat history per thread, and explains the kinds of problems SecondOrder handles well before the first message.',
   },
 ];
 
 const roadmapPhases = [
   {
-    phase: 'Phase 1',
-    title: 'Structured response modes',
+    phase: 'Shipped now',
+    title: 'Structured meta chat',
     description:
-      'Introduce explicit plan, answer, critique, and refine behaviors so the assistant acts more deliberately on every task.',
+      'Visible task framing, planner and critic workflow output, compact plan previews, confidence signals, structured feedback, and lifecycle instrumentation are live.',
   },
   {
-    phase: 'Phase 2',
-    title: 'Planning and self-critique',
+    phase: 'Next',
+    title: 'Tools and evidence-aware execution',
     description:
-      'Add planner and critic passes that extract constraints, inspect drafts, and improve answer quality before delivery.',
+      'The next step is moving from reflective chat into reflective execution with tool routing, evidence-aware answering, and stronger stop conditions.',
   },
   {
-    phase: 'Phase 3',
-    title: 'Tools, memory, and orchestration',
+    phase: 'Later',
+    title: 'Memory and orchestration',
     description:
-      'Expand beyond chat with tool routing, memory, and eventually a judge-agent layer that chooses stronger strategies per task.',
+      'Longer term, SecondOrder can add durable memory, adaptive strategy reuse, and a coordinator layer for multi-pass or multi-model execution when justified.',
   },
 ];
 
@@ -127,16 +133,16 @@ export default function Home() {
           <section className="mt-16 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
               <p className="text-sm uppercase tracking-[0.4em] text-ink/60">
-                New layer of LLM cognition
+                Structured meta-thinking assistant
               </p>
               <h1 className="mt-6 font-display text-5xl leading-tight sm:text-6xl">
-                Meta cognition that orchestrates thinking, tools, and
-                improvement.
+                See how the assistant frames the task before you trust the answer.
               </h1>
               <p className="mt-6 text-lg text-ink/70">
-                SecondOrder builds a self-auditing system that reasons about its
-                own reasoning. It generates strategies, coordinates models, and
-                learns from feedback to solve hard problems with precision.
+                SecondOrder turns hidden orchestration into a product surface.
+                In `/chat`, complex requests can show task framing, a compact
+                plan preview, confidence signals, and structured feedback so the
+                assistant is easier to inspect and improve.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link href="/chat">
@@ -146,24 +152,24 @@ export default function Home() {
               <div className="mt-10 grid gap-6 sm:grid-cols-3">
                 <div>
                   <p className="text-sm uppercase tracking-[0.3em] text-ink/50">
-                    AI gateway
+                    Meta mode
                   </p>
-                  <p className="mt-2 text-xl font-semibold">GPT-5.4 stack</p>
+                  <p className="mt-2 text-xl font-semibold">Visible framing</p>
                 </div>
                 <div>
                   <p className="text-sm uppercase tracking-[0.3em] text-ink/50">
-                    Solver builder
+                    Workflow
                   </p>
                   <p className="mt-2 text-xl font-semibold">
-                    Tool-driven agents
+                    Planner + critic
                   </p>
                 </div>
                 <div>
                   <p className="text-sm uppercase tracking-[0.3em] text-ink/50">
-                    Memory
+                    Evaluation
                   </p>
                   <p className="mt-2 text-xl font-semibold">
-                    Self-learning core
+                    Feedback + events
                   </p>
                 </div>
               </div>
@@ -203,9 +209,10 @@ export default function Home() {
               A deliberate, adaptive layer for reasoning.
             </h2>
             <p className="mt-4 text-ink/70">
-              SecondOrder is a meta system that analyzes prompts, creates
-              structured plans, and continuously adjusts its reasoning strategy
-              to stay within real-world constraints like compute and budget.
+              SecondOrder is a chat product that exposes enough of its meta
+              layer to make harder requests legible. It classifies the task,
+              builds structured workflow output, and surfaces the parts users
+              actually need to evaluate the answer.
             </p>
           </div>
           <div className="grid gap-4 rounded-3xl border border-ink/10 bg-white/60 p-8">
@@ -229,9 +236,9 @@ export default function Home() {
               A working v1 is already in place.
             </h2>
             <p className="mt-4 text-ink/70">
-              SecondOrder is not just a concept page. The current release
-              already includes a live chat assistant, streaming responses, and a
-              meta-thinking system prompt focused on reflective reasoning.
+              SecondOrder is no longer just positioning. The current release
+              already ships the first user-visible version of the meta-thinking
+              experience inside chat.
             </p>
           </div>
           <div className="grid gap-4">
@@ -258,7 +265,7 @@ export default function Home() {
               Iterative problem solving
             </p>
             <h3 className="mt-4 font-display text-3xl">
-              A loop designed to refine every output.
+              A structured loop designed for harder requests.
             </h3>
             <div className="mt-6 space-y-4">
               {iterativeLoop.map((step, index) => (
@@ -276,27 +283,27 @@ export default function Home() {
               Self-auditing
             </p>
             <h3 className="mt-4 font-display text-3xl">
-              Progress monitoring that knows when to stop.
+              Trust signals that expose uncertainty without dumping internals.
             </h3>
             <p className="mt-4 text-sm text-bone/80">
-              The system autonomously audits its own progress, checks
-              completeness, and decides when it has enough information to reach
-              a reliable conclusion.
+              SecondOrder keeps the internal prompts hidden, but it can surface
+              confidence, limitations, and context gaps so the answer is easier
+              to inspect before you act on it.
             </p>
             <div className="mt-10 flex items-center justify-between border-t border-bone/20 pt-6">
               <div>
                 <p className="text-xs uppercase tracking-[0.3em] text-bone/60">
-                  Judge agent
+                  Workflow
                 </p>
                 <p className="mt-2 text-lg font-semibold">
-                  Planner + evaluator
+                  Planner + critic
                 </p>
               </div>
               <div>
                 <p className="text-xs uppercase tracking-[0.3em] text-bone/60">
-                  Output
+                  User signal
                 </p>
-                <p className="mt-2 text-lg font-semibold">Verified solution</p>
+                <p className="mt-2 text-lg font-semibold">Feedback captured</p>
               </div>
             </div>
           </div>
@@ -310,14 +317,14 @@ export default function Home() {
               <p className="text-sm uppercase tracking-[0.4em] text-ink/60">
                 Meta-thinking in AI
               </p>
-              <h2 className="mt-4 font-display text-4xl">
-                Cognition that can inspect itself.
-              </h2>
-              <p className="mt-4 text-ink/70">
-                Inspired by human metacognition, SecondOrder plans, monitors,
-                and evaluates its own thinking to build more resilient reasoning
-                pathways.
-              </p>
+            <h2 className="mt-4 font-display text-4xl">
+              Cognition that can inspect itself.
+            </h2>
+            <p className="mt-4 text-ink/70">
+              Inspired by human metacognition, SecondOrder makes planning,
+              critique, and uncertainty visible enough to build trust without
+              exposing raw chain-of-thought.
+            </p>
             </div>
             <div className="space-y-4">
               {metaThinking.map((item) => (
@@ -340,14 +347,14 @@ export default function Home() {
               <p className="text-sm uppercase tracking-[0.4em] text-bone/70">
                 Product roadmap
               </p>
-              <h2 className="mt-4 font-display text-4xl">
-                What comes after the current assistant.
-              </h2>
-              <p className="mt-4 text-bone/75">
-                The next releases push SecondOrder from a prompt-shaped
-                assistant toward a real meta-cognitive system with planning,
-                critique, tools, memory, and orchestration.
-              </p>
+            <h2 className="mt-4 font-display text-4xl">
+                What comes after structured meta chat.
+            </h2>
+            <p className="mt-4 text-bone/75">
+                The current release productizes planning and critique inside
+                chat. The next releases push deeper into tools, evidence-aware
+                execution, memory, and orchestration.
+            </p>
             </div>
             <div className="space-y-4">
               {roadmapPhases.map((item) => (
@@ -380,8 +387,8 @@ export default function Home() {
                 Put meta cognition into production.
               </h2>
               <p className="mt-3 text-ink/70">
-                Build a system that improves with every iteration and produces
-                reliable reasoning at scale.
+                Try the shipped meta-thinking chat experience and inspect how it
+                frames, plans, and qualifies harder problems.
               </p>
             </div>
             <Link href="/chat">

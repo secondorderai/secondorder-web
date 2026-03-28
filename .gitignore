@@ -12,3 +12,4 @@ playwright-report/
 coverage
 .env.local
 tsconfig.tsbuildinfo
+.mastra

@@ -1,0 +1,23 @@
+# Progress
+
+- Completed the Phase A backend contract task to extend the meta chat workflow and request context with structured `meta` fields for goal, constraints, plan, response strategy, confidence, limitations, and context gaps.
+- Updated the planner/critic workflow pipeline and agent prompt wiring to produce and consume the new structured metadata instead of freeform plan and critique summary strings.
+- Added focused Vitest coverage for the structured contract shape and updated the chat route test fixture to match the new workflow result.
+- Verified the change with `npm test -- app/api/chat/route.test.ts lib/chat/contracts.test.ts` and `npm run ts-check`.
+- Implemented visible meta mode for assistant replies by attaching structured workflow metadata to streamed assistant messages and rendering a compact task-framing card with task type, goal, constraints summary, and a structured meta-pass indicator for meta-routed responses.
+- Added focused coverage for the visible meta mode UI in `app/chat/_components/chat-message.test.tsx` and `e2e/chat.spec.ts`.
+- Verified the change with `npm test -- app/api/chat/route.test.ts app/chat/_components/chat-message.test.tsx`, `npm run test:e2e -- e2e/chat.spec.ts --project=chromium`, and `npm run ts-check`.
+- Implemented the plan preview task by adding a compact, collapsed-by-default plan disclosure to meta-routed assistant messages that expands to show structured workflow steps without exposing raw internal prompts.
+- Added focused coverage for the plan preview behavior in `app/chat/_components/chat-message.test.tsx` and `e2e/chat.spec.ts`.
+- Implemented the confidence and limitation signals task by extending the meta summary card for meta-routed assistant messages with structured confidence badges, surfaced limitations, and explicit context-gap messaging from workflow metadata.
+- Added focused coverage for the trust-signal UI in `app/chat/_components/chat-message.test.tsx` and `e2e/chat.spec.ts`.
+- Verified the change with `npm test -- app/chat/_components/chat-message.test.tsx`, `npm run test:e2e -- e2e/chat.spec.ts --project=chromium`, and `npm run ts-check`.
+- Implemented the structured feedback capture task by adding per-response feedback controls for assistant messages, a dedicated `/api/chat/feedback` endpoint, and persistent feedback event storage with thread ID, message ID, task type, feedback value, and server timestamp.
+- Added focused coverage for the feedback flow in `app/api/chat/feedback/route.test.ts`, `app/chat/_components/chat-message.test.tsx`, and `e2e/chat.spec.ts`.
+- Verified the change with `npm test -- app/api/chat/feedback/route.test.ts app/chat/_components/chat-message.test.tsx`, `npm run test:e2e -- e2e/chat.spec.ts --project=chromium`, and `npm run ts-check`.
+- Implemented the instrumentation and evaluation baseline task by adding persistent `chat_events` storage, a dedicated `/api/chat/events` endpoint, and chat lifecycle event emission for thread starts, message submission, task classification, meta-mode use, response completion, plan preview expansion, and feedback submission.
+- Added a baseline metrics calculator for meta-mode share, feedback positivity, response completion, average turns per successful thread, and plan-preview view rate, plus focused coverage in `app/api/chat/route.test.ts`, `app/api/chat/events/route.test.ts`, `app/api/chat/feedback/route.test.ts`, `app/chat/_components/chat-message.test.tsx`, `lib/chat/contracts.test.ts`, `lib/chat/events.test.ts`, and `e2e/chat.spec.ts`.
+- Verified the change with `npm test -- app/api/chat/route.test.ts app/api/chat/events/route.test.ts app/api/chat/feedback/route.test.ts app/chat/_components/chat-message.test.tsx lib/chat/contracts.test.ts lib/chat/events.test.ts`, `npm run test:e2e -- e2e/chat.spec.ts --project=chromium`, and `npm run ts-check`.
+- Implemented the better chat onboarding task by replacing the empty chat state with a product-oriented meta-thinking introduction, suggested prompts for planning, analysis, decisions, and troubleshooting, and prompt-to-composer seeding for faster first turns.
+- Added focused coverage for the onboarding experience in `app/chat/_components/chat-message-list.test.tsx` and `e2e/chat.spec.ts`.
+- Verified the change with `npm test -- app/chat/_components/chat-message-list.test.tsx`, `npm run test:e2e -- e2e/chat.spec.ts --project=chromium`, and `npm run ts-check`.
