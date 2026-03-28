@@ -1,6 +1,5 @@
-import type { Client } from '@libsql/client';
 import type { ChatEventBody } from './contracts';
-import { chatStorageClient } from './storage';
+import { chatStorageClient, type ChatStorageClient } from './storage';
 
 export interface ChatEventRecord extends ChatEventBody {
   id: string;
@@ -17,7 +16,7 @@ export interface ChatEvaluationMetrics {
 
 let initPromise: Promise<void> | null = null;
 
-async function ensureChatEventsTable(client: Client = chatStorageClient) {
+async function ensureChatEventsTable(client: ChatStorageClient = chatStorageClient) {
   if (!initPromise) {
     initPromise = client
       .execute(`
@@ -120,7 +119,7 @@ export function calculateChatEvaluationMetrics(
 
 export async function recordChatEvent(
   input: ChatEventBody,
-  client: Client = chatStorageClient,
+  client: ChatStorageClient = chatStorageClient,
 ) {
   await ensureChatEventsTable(client);
 
@@ -130,8 +129,8 @@ export async function recordChatEvent(
     ...input,
   };
 
-  await client.execute({
-    sql: `
+  await client.execute(
+    `
       INSERT INTO chat_events (
         id,
         event_type,
@@ -142,7 +141,7 @@ export async function recordChatEvent(
         created_at
       ) VALUES (?, ?, ?, ?, ?, ?, ?)
     `,
-    args: [
+    [
       event.id,
       event.eventType,
       event.threadId,
@@ -151,12 +150,12 @@ export async function recordChatEvent(
       event.metadata ? JSON.stringify(event.metadata) : null,
       event.createdAt,
     ],
-  });
+  );
 
   return event;
 }
 
-export async function getChatEvaluationMetrics(client: Client = chatStorageClient) {
+export async function getChatEvaluationMetrics(client: ChatStorageClient = chatStorageClient) {
   await ensureChatEventsTable(client);
 
   const result = await client.execute(`

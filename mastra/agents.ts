@@ -5,10 +5,12 @@ import {
   getAgentModel,
   getCriticModel,
   getPlannerModel,
+  mastraStorage,
   SECOND_ORDER_SYSTEM_PROMPT,
 } from './config';
 
 export const chatMemory = new Memory({
+  storage: mastraStorage,
   options: {
     lastMessages: 20,
     generateTitle: true,

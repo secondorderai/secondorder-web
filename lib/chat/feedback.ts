@@ -30,8 +30,8 @@ export async function recordChatFeedback(input: ChatFeedbackBody) {
     createdAt: new Date().toISOString(),
   };
 
-  await chatStorageClient.execute({
-    sql: `
+  await chatStorageClient.execute(
+    `
       INSERT INTO chat_feedback_events (
         id,
         thread_id,
@@ -41,7 +41,7 @@ export async function recordChatFeedback(input: ChatFeedbackBody) {
         created_at
       ) VALUES (?, ?, ?, ?, ?, ?)
     `,
-    args: [
+    [
       event.id,
       input.threadId,
       input.messageId,
@@ -49,7 +49,7 @@ export async function recordChatFeedback(input: ChatFeedbackBody) {
       input.feedback,
       event.createdAt,
     ],
-  });
+  );
 
   return event;
 }

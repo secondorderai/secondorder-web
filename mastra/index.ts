@@ -3,7 +3,7 @@ import { secondOrderAgent, plannerAgent, criticAgent, chatMemory } from './agent
 import {
   createMastraLogger,
   createMastraObservability,
-  createMastraStorage,
+  mastraStorage,
 } from './config';
 import { metaChatWorkflow } from './workflows/meta-chat-workflow';
 
@@ -19,7 +19,7 @@ export const mastra = new Mastra({
   memory: {
     chat: chatMemory,
   },
-  storage: createMastraStorage(),
+  storage: mastraStorage,
   logger: createMastraLogger(),
   observability: createMastraObservability(),
 });

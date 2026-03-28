@@ -2,11 +2,13 @@ import { mkdirSync } from 'node:fs';
 import path from 'node:path';
 import { LibSQLStore } from '@mastra/libsql';
 import { PinoLogger } from '@mastra/loggers';
+import { PostgresStore } from '@mastra/pg';
 import {
   DefaultExporter,
   Observability,
   SensitiveDataFilter,
 } from '@mastra/observability';
+import { getDefaultMastraStorageUrl } from '@/lib/chat/storage-url';
 
 const DEFAULT_MODEL = 'openai/gpt-5.1';
 
@@ -38,7 +40,14 @@ export function getCriticModel() {
 }
 
 export function createMastraStorage() {
-  const url = process.env.MASTRA_STORAGE_URL ?? 'file:./.mastra/secondorder.db';
+  if (process.env.DATABASE_URL) {
+    return new PostgresStore({
+      id: 'secondorder-storage',
+      connectionString: process.env.DATABASE_URL,
+    });
+  }
+
+  const url = getDefaultMastraStorageUrl();
 
   if (url.startsWith('file:')) {
     const filePath = url.slice('file:'.length);
@@ -52,6 +61,8 @@ export function createMastraStorage() {
     authToken: process.env.MASTRA_STORAGE_AUTH_TOKEN,
   });
 }
+
+export const mastraStorage = createMastraStorage();
 
 export function createMastraLogger() {
   return new PinoLogger({
