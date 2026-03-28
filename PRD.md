@@ -1,0 +1,329 @@
+# PRD: Milestone 1.5 - Structured Meta Chat
+
+**Product**: SecondOrder Web  
+**Date**: March 8, 2026  
+**Status**: Draft  
+**Document owner**: Product / Engineering
+
+## 1. Summary
+
+The next milestone should productize the meta-thinking system that already exists in the codebase.
+
+Today, SecondOrder has:
+
+- a polished marketing page at [`/Users/henry/workspace/secondorder-web/app/page.tsx`](/Users/henry/workspace/secondorder-web/app/page.tsx)
+- a thread-based chat experience at [`/Users/henry/workspace/secondorder-web/app/chat/[threadId]/page.tsx`](/Users/henry/workspace/secondorder-web/app/chat/[threadId]/page.tsx)
+- a Mastra-backed workflow that already classifies tasks, generates plans, drafts responses, and critiques them before the final answer at [`/Users/henry/workspace/secondorder-web/mastra/workflows/meta-chat-workflow.ts`](/Users/henry/workspace/secondorder-web/mastra/workflows/meta-chat-workflow.ts)
+- memory-backed thread history and resource scoping in [`/Users/henry/workspace/secondorder-web/app/api/chat/route.ts`](/Users/henry/workspace/secondorder-web/app/api/chat/route.ts)
+
+What is missing is the actual product layer that makes this differentiation visible and useful to the user.
+
+This milestone should ship a clearer, more trustworthy chat product with:
+
+- visible task framing
+- optional plan preview
+- confidence and limitation signals
+- structured feedback capture
+- basic instrumentation for evaluation
+
+This is the narrowest milestone that turns SecondOrder from "chat with hidden orchestration" into "a meta-thinking assistant users can understand and trust."
+
+## 2. Problem
+
+The current app has meaningful backend meta-orchestration, but the user experience still feels like a standard chat interface.
+
+Current gaps:
+
+- users cannot see how SecondOrder interpreted their task
+- plans and critiques are used internally but never surfaced
+- there is no confidence or uncertainty signaling
+- there is no structured feedback loop to improve future responses
+- success is not measured with product-level analytics or evaluation events
+
+As a result, the product promise on the landing page is ahead of the in-product experience.
+
+## 3. Goal
+
+Ship the first user-visible version of SecondOrder's meta-thinking experience inside `/chat`.
+
+By the end of this milestone, a user should be able to:
+
+- ask a complex question
+- see how SecondOrder framed the task
+- optionally inspect the plan before or alongside the answer
+- understand when the assistant is confident vs uncertain
+- give simple feedback on whether the response was useful
+
+## 4. Non-Goals
+
+This milestone should not include:
+
+- broad tool-calling beyond what Mastra already supports internally
+- multi-agent UI visualizations or raw chain-of-thought exposure
+- long-term personalized memory controls
+- judge-agent or multi-model orchestration UI
+- large marketing-site redesign work
+
+## 5. User Segments
+
+Primary users:
+
+- founders, operators, and technical users exploring SecondOrder's core differentiation
+- early adopters evaluating whether the assistant is better than generic chat for planning, analysis, decisions, and troubleshooting
+
+Secondary users:
+
+- internal team members using the product to validate reasoning quality and product positioning
+
+## 6. Current State Analysis
+
+### What is already implemented
+
+- New thread creation via `/chat` redirect to unique thread URLs
+- Thread-scoped message history and resource isolation
+- Request validation and oversized-input rejection
+- Task classification into `simple_chat`, `analysis`, `planning`, `decision`, and `troubleshooting`
+- Planner and critic agents
+- Request-context injection into the final agent
+- Memory-backed chat history
+- Mastra storage, logging, and observability wiring
+- Unit coverage for chat utilities, registry logic, and API route behavior
+
+### What is not yet productized
+
+- task-type display in the UI
+- user-visible plan summaries
+- confidence badges or uncertainty messaging
+- feedback controls per answer
+- conversation-level outcome tracking
+- instrumentation tied to chat behavior
+- clear empty-state onboarding for "how to use SecondOrder differently"
+
+## 7. Milestone Thesis
+
+The next milestone is not "build more intelligence." It is "make existing intelligence legible, controllable, and measurable."
+
+The product should expose enough of the meta layer to create trust and differentiation without exposing raw internal reasoning.
+
+## 8. Scope
+
+### In scope
+
+#### A. Visible Meta Mode
+
+For non-`simple_chat` requests, the chat experience should show a compact task-framing block that includes:
+
+- [x] detected task type
+- [x] short goal summary
+- [x] optional constraints summary if available
+- [x] whether SecondOrder is using a structured meta pass
+
+This should appear as a compact system-style card above the assistant response or as a collapsible pre-answer block.
+
+#### B. Plan Preview
+
+For complex tasks, users should be able to view a compact plan summary generated by the planner workflow.
+
+Requirements:
+
+- [x] default to compact, not verbose
+- [x] avoid exposing chain-of-thought or raw internal prompts
+- [x] support a collapsed and expanded state
+- [x] never block the final answer if the plan preview fails
+
+#### C. Confidence and Limitation Signals
+
+Each assistant response for meta-routed tasks should include lightweight trust signals such as:
+
+- [x] confidence level: low, medium, high
+- [x] explicit note when assumptions are weak
+- [x] explicit note when more context would improve the answer
+
+These signals should come from structured workflow output, not hardcoded UI copy.
+
+#### D. Feedback Capture
+
+Users should be able to provide structured feedback on assistant messages.
+
+Initial feedback schema:
+
+- [x] helpful
+- [x] not helpful
+- [x] needs more depth
+- [x] missed constraints
+
+Feedback should be stored as an event with thread ID, message ID, task type, and timestamp.
+
+#### E. Instrumentation and Evaluation Baseline
+
+Track enough events to evaluate whether visible meta behavior improves user outcomes.
+
+Minimum events:
+
+- [x] thread started
+- [x] message submitted
+- [x] task classified
+- [x] meta mode used
+- [x] plan preview expanded
+- [x] response completed
+- [x] feedback submitted
+
+Minimum metrics:
+
+- share of conversations routed to meta mode
+- feedback positivity rate
+- response completion rate
+- average turns per successful thread
+- percentage of meta-routed responses where plan preview is viewed
+
+#### F. Better Chat Onboarding
+
+The empty state in chat should explain what makes SecondOrder different and suggest task types it handles well:
+
+- [x] planning
+- [x] analysis
+- [x] decisions
+- [x] troubleshooting
+
+This should improve first-message quality and align product experience with landing-page claims.
+
+### Out of scope
+
+- persistent user profile settings
+- memory inspection/deletion UI
+- external connectors or retrieval systems
+- pricing, auth, billing, or team collaboration
+- extensive redesign of the visual system
+
+## 9. Product Requirements
+
+### Functional requirements
+
+1. [x] The system must show visible task framing for meta-routed requests.
+2. [x] The system must expose a compact plan preview for meta-routed requests.
+3. [x] The system must show confidence or limitation signals alongside the assistant answer.
+4. [x] The system must allow users to submit structured feedback on individual assistant responses.
+5. [x] The system must emit analytics and evaluation events for the full chat lifecycle.
+6. [x] The system must preserve the current thread-based URL model and history loading behavior.
+7. [x] The system must continue hiding raw internal reasoning and prompt text.
+
+### UX requirements
+
+1. The chat must still feel fast and conversational.
+2. Meta information must be skimmable and collapsible.
+3. Simple-chat requests should remain lightweight and should not show unnecessary framing chrome.
+4. Visible trust signals should be informative, not alarmist.
+5. The interface should work cleanly on desktop and mobile.
+
+### Technical requirements
+
+1. [x] Extend workflow output schemas rather than inferring UI state from freeform text.
+2. [x] Keep UI concerns in chat route components, not in shared primitives unless reuse is justified.
+3. [x] Preserve strict TypeScript and current testing patterns.
+4. [x] Add focused Vitest coverage for new structured chat state logic.
+5. [x] Add Playwright coverage for the visible meta-mode flow.
+
+## 10. User Stories
+
+1. As a user asking for a plan, I want to see how the assistant framed my request so I can trust that it understood the job.
+2. As a user working on a hard problem, I want to inspect a compact plan so I can judge whether the reasoning direction is sound.
+3. As a cautious user, I want clear confidence and limitation signals so I know when to trust the answer and when to add more context.
+4. As a product team member, I want feedback and event data so I can tell whether the meta-thinking layer is improving outcomes.
+
+## 11. Success Metrics
+
+### Primary success metrics
+
+- At least 60% of meta-routed conversations receive a user feedback event
+- Helpful feedback rate is at least 20 points higher for meta-routed threads than baseline generic threads
+- At least 40% of meta-routed responses have the plan preview opened
+- Chat completion rate improves relative to the current baseline
+
+### Secondary metrics
+
+- Reduced follow-up turns caused by misunderstanding the task
+- Increased repeat usage of `/chat`
+- Higher share of conversations in planning, analysis, decision, and troubleshooting categories
+
+## 12. Release Criteria
+
+The milestone is complete when:
+
+1. [x] Meta-routed tasks show visible task framing in the shipped UI.
+2. [x] Plan preview is available and collapsible.
+3. [x] Confidence and limitation signals are displayed for meta-routed responses.
+4. [x] Structured feedback events are captured.
+5. [x] Core analytics events are emitted.
+6. [x] New unit and E2E coverage pass.
+7. [x] `npm test` and `npm run ts-check` pass in the target branch.
+
+## 13. Risks
+
+### Risk: exposing too much internal reasoning
+
+Mitigation:
+
+- surface summaries, not raw prompts or chain-of-thought
+- keep plan previews compact and product-shaped
+
+### Risk: added UI makes chat feel slower or heavier
+
+Mitigation:
+
+- only show meta chrome for meta-routed tasks
+- default cards to compact collapsed states where appropriate
+
+### Risk: workflow outputs are not structured enough for UI
+
+Mitigation:
+
+- formalize schema fields for goal, constraints, plan summary, and confidence
+- avoid parsing freeform assistant text for product state
+
+### Risk: instrumentation exists technically but is not actionable
+
+Mitigation:
+
+- define the event list and success metrics before implementation
+- keep the first milestone event model intentionally small
+
+## 14. Suggested Delivery Plan
+
+### Phase A: Schema and backend contract
+
+- extend workflow result schema for visible task framing and confidence
+- ensure API and request context return stable fields for UI rendering
+- add event hooks for analytics and feedback
+
+### Phase B: Chat UX
+
+- add empty-state onboarding improvements
+- add meta summary card and plan preview UI
+- add confidence and limitation presentation
+- add message-level feedback controls
+
+### Phase C: Validation
+
+- add targeted Vitest coverage
+- add Playwright coverage for meta-routed flows
+- verify `npm test` and `npm run ts-check`
+
+## 15. Recommended File Targets
+
+Likely implementation areas:
+
+- [`/Users/henry/workspace/secondorder-web/mastra/workflows/meta-chat-workflow.ts`](/Users/henry/workspace/secondorder-web/mastra/workflows/meta-chat-workflow.ts)
+- [`/Users/henry/workspace/secondorder-web/lib/chat/contracts.ts`](/Users/henry/workspace/secondorder-web/lib/chat/contracts.ts)
+- [`/Users/henry/workspace/secondorder-web/app/api/chat/route.ts`](/Users/henry/workspace/secondorder-web/app/api/chat/route.ts)
+- [`/Users/henry/workspace/secondorder-web/app/chat/_components/chat-page-client.tsx`](/Users/henry/workspace/secondorder-web/app/chat/_components/chat-page-client.tsx)
+- [`/Users/henry/workspace/secondorder-web/app/chat/_components/chat-message-list.tsx`](/Users/henry/workspace/secondorder-web/app/chat/_components/chat-message-list.tsx)
+- [`/Users/henry/workspace/secondorder-web/app/chat/_components/chat-message.tsx`](/Users/henry/workspace/secondorder-web/app/chat/_components/chat-message.tsx)
+- [`/Users/henry/workspace/secondorder-web/e2e/chat.spec.ts`](/Users/henry/workspace/secondorder-web/e2e/chat.spec.ts)
+
+## 16. Final Recommendation
+
+The clearest next milestone is:
+
+**Make SecondOrder's hidden meta workflow visible, trustworthy, and measurable in chat.**
+
+That is the highest-leverage step because it builds directly on infrastructure already present in the repo, closes the gap between marketing promise and product reality, and creates the baseline needed for later milestones like tools, memory controls, and judge-agent orchestration.

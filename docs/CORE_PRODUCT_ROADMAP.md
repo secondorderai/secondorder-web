@@ -103,12 +103,12 @@ The assistant should improve from:
 
 Goal: turn the current prompt-driven assistant into a more structured chat product without adding major system complexity.
 
-- formalize assistant response patterns for task interpretation, plan proposal, execution, and reflection
-- add conversation-safe task classification in the backend
-- add response modes such as `answer`, `plan`, `critique`, and `refine`
-- improve error handling and guardrails around malformed or oversized inputs
-- add telemetry for prompt type, latency, error rate, and completion rate
-- define baseline product metrics for helpfulness, confidence, and task completion
+- [ ] formalize assistant response patterns for task interpretation, plan proposal, execution, and reflection
+- [x] add conversation-safe task classification in the backend
+- [ ] add response modes such as `answer`, `plan`, `critique`, and `refine`
+- [x] improve error handling and guardrails around malformed or oversized inputs
+- [ ] add telemetry for prompt type, latency, error rate, and completion rate
+- [ ] define baseline product metrics for helpfulness, confidence, and task completion
 
 Deliverable:
 
@@ -118,12 +118,12 @@ Deliverable:
 
 Goal: introduce explicit meta-cognitive behaviors that improve answer quality on harder tasks.
 
-- add a planner step that extracts goals, constraints, and execution strategy
-- add a critique step that reviews draft outputs before final delivery
-- add confidence or uncertainty signaling in responses
-- introduce optional user-visible plan previews for complex tasks
-- support iterative refinement loops inside a single request lifecycle
-- add quality checks for unsupported claims, incomplete reasoning, and missing constraints
+- [x] add a planner step that extracts goals, constraints, and execution strategy
+- [x] add a critique step that reviews draft outputs before final delivery
+- [x] add confidence or uncertainty signaling in responses
+- [x] introduce optional user-visible plan previews for complex tasks
+- [ ] support iterative refinement loops inside a single request lifecycle
+- [ ] add quality checks for unsupported claims, incomplete reasoning, and missing constraints
 
 Deliverable:
 
@@ -133,12 +133,12 @@ Deliverable:
 
 Goal: move from reflective chat to reflective task execution.
 
-- define a tool-calling architecture for web, retrieval, calculators, structured transforms, and internal utilities
-- route task types to the right tool and reasoning mode
-- add evidence-aware answering for research and synthesis tasks
-- expose execution traces at the product level in a compact, human-readable form
-- add explicit stop conditions so the assistant knows when to answer, ask, or continue gathering information
-- support multi-step workflows instead of one-shot responses
+- [ ] define a tool-calling architecture for web, retrieval, calculators, structured transforms, and internal utilities
+- [ ] route task types to the right tool and reasoning mode
+- [ ] add evidence-aware answering for research and synthesis tasks
+- [ ] expose execution traces at the product level in a compact, human-readable form
+- [ ] add explicit stop conditions so the assistant knows when to answer, ask, or continue gathering information
+- [ ] support multi-step workflows instead of one-shot responses
 
 Deliverable:
 
@@ -148,12 +148,12 @@ Deliverable:
 
 Goal: make the assistant improve across sessions and repeated workflows.
 
-- add user-scoped memory for preferences, goals, and recurring work patterns
-- separate short-term conversational memory from durable long-term memory
-- store reusable strategies for recurring task classes
-- learn preferred response formats and decision styles from feedback
-- add controls for memory inspection, correction, and deletion
-- use memory selectively rather than injecting everything into every request
+- [ ] add user-scoped memory for preferences, goals, and recurring work patterns
+- [ ] separate short-term conversational memory from durable long-term memory
+- [ ] store reusable strategies for recurring task classes
+- [ ] learn preferred response formats and decision styles from feedback
+- [ ] add controls for memory inspection, correction, and deletion
+- [ ] use memory selectively rather than injecting everything into every request
 
 Deliverable:
 
@@ -163,12 +163,12 @@ Deliverable:
 
 Goal: deliver the differentiated core claim of SecondOrder as a system, not just a single assistant persona.
 
-- add a judge or coordinator layer that can choose between strategy variants
-- support multi-model or multi-pass execution where justified by quality or cost
-- evaluate candidate outputs before selecting a final answer
-- incorporate budget-aware strategy selection
-- add explicit solve loops for research, planning, drafting, and analysis tasks
-- create a policy layer for when deeper reasoning is worth the additional latency
+- [ ] add a judge or coordinator layer that can choose between strategy variants
+- [ ] support multi-model or multi-pass execution where justified by quality or cost
+- [ ] evaluate candidate outputs before selecting a final answer
+- [ ] incorporate budget-aware strategy selection
+- [ ] add explicit solve loops for research, planning, drafting, and analysis tasks
+- [ ] create a policy layer for when deeper reasoning is worth the additional latency
 
 Deliverable:
 
@@ -182,33 +182,33 @@ These tracks can run in parallel across phases.
 
 ### Assistant Experience
 
-- better onboarding into "how to use SecondOrder"
-- visible task framing before answer generation
-- plan/answer/refine interaction patterns
-- richer feedback capture than thumbs up/down
-- exportable work artifacts such as plans, summaries, and decision logs
+- [x] better onboarding into "how to use SecondOrder"
+- [x] visible task framing before answer generation
+- [ ] plan/answer/refine interaction patterns
+- [x] richer feedback capture than thumbs up/down
+- [ ] exportable work artifacts such as plans, summaries, and decision logs
 
 ### Trust and Safety
 
-- explicit uncertainty handling
-- evidence thresholds for factual claims
-- hallucination reduction checks
-- audit logs for tool usage and answer construction
-- privacy-aware memory controls
+- [x] explicit uncertainty handling
+- [ ] evidence thresholds for factual claims
+- [ ] hallucination reduction checks
+- [ ] audit logs for tool usage and answer construction
+- [ ] privacy-aware memory controls
 
 ### Evaluation
 
-- benchmark suite for reasoning, planning, and self-correction
-- task-completion scoring rather than only model-response scoring
-- regression testing for system-prompt and orchestration changes
-- side-by-side comparison against a plain chat baseline
+- [ ] benchmark suite for reasoning, planning, and self-correction
+- [ ] task-completion scoring rather than only model-response scoring
+- [x] regression testing for system-prompt and orchestration changes
+- [ ] side-by-side comparison against a plain chat baseline
 
 ### Platform
 
-- modular backend for planner, critic, memory, and tool routing
-- traceability for each decision stage
-- cost and latency budgets by workflow type
-- admin visibility into failure modes and adoption patterns
+- [x] modular backend for planner, critic, memory, and tool routing
+- [ ] traceability for each decision stage
+- [ ] cost and latency budgets by workflow type
+- [ ] admin visibility into failure modes and adoption patterns
 
 ---
 
@@ -216,21 +216,21 @@ These tracks can run in parallel across phases.
 
 ### Near Term
 
-- stabilize assistant behavior and instrumentation
-- add structured planning and critique modes
-- define evaluation metrics before adding too much complexity
+- [x] stabilize assistant behavior and instrumentation
+- [x] add structured planning and critique modes
+- [x] define evaluation metrics before adding too much complexity
 
 ### Mid Term
 
-- add tools, execution routing, and iterative solve loops
-- add user memory with strong controls
-- create product-visible explanations of plans and confidence
+- [ ] add tools, execution routing, and iterative solve loops
+- [ ] add user memory with strong controls
+- [x] create product-visible explanations of plans and confidence
 
 ### Long Term
 
-- ship judge-agent orchestration
-- optimize strategy selection by task type, latency, and budget
-- move from chat product to adaptive reasoning workspace
+- [ ] ship judge-agent orchestration
+- [ ] optimize strategy selection by task type, latency, and budget
+- [ ] move from chat product to adaptive reasoning workspace
 
 ---
 
