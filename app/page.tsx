@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { MermaidDiagram } from '@/components/marketing/mermaid-diagram';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -37,6 +38,22 @@ const iterativeLoop = [
   'Review the draft for confidence, limitations, and missing context.',
   'Return the answer with visible framing, then capture user feedback.',
 ];
+
+const marketingThinkingDiagram = String.raw`
+flowchart TD
+    request["User asks for help"]
+    classify["Classify the task<br/>simple chat, analysis, planning,<br/>decision, or troubleshooting"]
+    gate{"Use meta mode?"}
+    direct["Direct answer path<br/>Respond normally when the task is easy"]
+    plan["Planner pass<br/>Extract goal, constraints, plan,<br/>and response strategy"]
+    draft["Draft pass<br/>Create a compact draft response"]
+    critique["Critic pass<br/>Check assumptions, limitations,<br/>and context gaps"]
+    final["Final answer<br/>Show the response with compact framing<br/>and trust signals"]
+
+    request --> classify --> gate
+    gate -- "No" --> direct --> final
+    gate -- "Yes" --> plan --> draft --> critique --> final
+`;
 
 const overview = [
   'A meta layer on top of chat that makes task interpretation visible.',
@@ -254,6 +271,50 @@ export default function Home() {
                 <p className="mt-3 text-sm text-ink/75">{item.description}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 py-16 sm:px-10">
+        <div className="rounded-[2rem] border border-ink/10 bg-white/70 p-8 shadow-soft-edge sm:p-12">
+          <div className="grid gap-10 lg:grid-cols-[0.42fr_0.58fr]">
+            <div>
+              <p className="text-sm uppercase tracking-[0.4em] text-ink/60">
+                Meta-thinking path
+              </p>
+              <h2 className="mt-4 font-display text-4xl">
+                A visible diagram of how SecondOrder thinks.
+              </h2>
+              <p className="mt-4 text-ink/70">
+                The system does not run the full planner and critic stack for
+                every prompt. It first classifies the request, then chooses the
+                light path or the structured path based on how much reasoning
+                the task needs.
+              </p>
+              <div className="mt-8 rounded-3xl border border-ink/10 bg-bone p-5">
+                <p className="text-xs uppercase tracking-[0.3em] text-ink/55">
+                  Why this matters
+                </p>
+                <p className="mt-3 text-sm text-ink/75">
+                  Friends trying the product can understand it as a chat system
+                  with a decision gate: answer directly when the task is easy,
+                  or switch into a planning and critique loop when the task is
+                  ambiguous, risky, or multi-step.
+                </p>
+              </div>
+            </div>
+
+            <div className="rounded-[2rem] border border-ink/10 bg-bone p-5 sm:p-6">
+              <MermaidDiagram
+                chart={marketingThinkingDiagram}
+                className="bg-white/90"
+              />
+              <p className="mt-4 text-sm text-ink/65">
+                The key product idea is the decision gate in the middle:
+                simple prompts stay fast, while complex prompts trigger the
+                planning and critique loop.
+              </p>
+            </div>
           </div>
         </div>
       </section>
